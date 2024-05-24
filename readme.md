@@ -51,12 +51,19 @@ overlays:
 
 ```yaml
 overlays:
-  # 按组件进行配置覆盖
-  components:
-    fc3:
-      functionName: ${source.functionName}-${this.project}-${this.name}
-      timeout: 50
-      instanceConcurrency: 1
+  resources:
+    api1:
+      functionName: api1-prod
+      timeout: 100
+      vpcConfig: auto # 也可以指定自己的VPC
+    api2:
+      functionName: api2-prod
+      instanceConcurrency: 10
+      vpcConfig: auto # 也可以指定自己的VPC
+      # 修改启动参数，注入env信息
+      customRuntimeConfig:
+        args:
+          - --env=prod 
 ```
 ### 预览配置
 ```
